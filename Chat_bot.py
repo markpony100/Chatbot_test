@@ -14,23 +14,27 @@ def Chat_Reply(event):
     print("IN Group Reply")
     text = event.message.text[1:]
     print(text)
-    userid = event.source.user_id 
-    product = pd.read_csv("products.csv")
-    print(product["產品"])
+    product = pd.read_csv("products.csv",encoding = "big5")
+    print(product)
     #Order State
     if ("我要" in text[:2]):
         members = pd.read_csv("members.csv")
-        
+        userid = event.source.user_id 
         if userid not in members["ID"]:#確認使用者有註冊會員
             send_text_message(event.reply_token, "您尚未註冊會員,請先加我好友跟我聊聊天唷>.<")
             return
         
         
     
-    
-    if(text in product["產品"].values):
+    #demo  with image carousel
+    elif(text == "產品" ):
         print("in 產品")
-        push_carousel(event.reply_token,product)
+        push_image_carousel(event.reply_token,product)
+    
+    elif ("賣" in text):
+        print("IN 產品介紹")
+        
+        #send_text_message(event.reply_token,
         
     
     

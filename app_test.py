@@ -16,21 +16,39 @@ IDLE_TIME = 30
 TIME = None
 USER = None
 user_machine = ToUserMachine(
-    states=["user","func_lobby",],
+    states=["user","func_lobby","member_lobby","check_lobby"],
     transitions=[
         {#初始到功能選則
             "trigger": "advance",
             "source": "user",
             "dest": "func_lobby",
-            "conditions": "is_going_to_func_lobby",
+            "conditions": "is_going_to_func_lobby"
         },
         {#初始到功能選則
             "trigger": "advance",
             "source": "func_lobby",
-            "dest": "user",
-            "conditions": "is_leaving_func_lobby",
+            "dest": "member_lobby",
+            "conditions": "is_going_member_lobby",
         },
-        #,{"trigger": "go_back_to_func_lobby", "source": ["check_lobby"], "dest": "user"},
+        {#初始到功能選則
+            "trigger": "advance",
+            "source": "member_lobby",
+            "dest": "check_lobby",
+            "conditions": "is_going_check_lobby",
+        },
+        {#初始到功能選則
+            "trigger": "advance",
+            "source": "check_lobby",
+            "dest": "member_lobby",
+            "conditions": "back_member_lobby",
+        },
+        {#初始到功能選則
+            "trigger": "advance",
+            "source": "check_lobby",
+            "dest": "func_lobby",
+            "conditions": "is_leaving_check_lobby",
+        },
+        {"trigger": "go_back_to_func_lobby", "source": ["check_lobby,member_lobby"], "dest": "func_lobby"},
     ],
     initial="user",
     auto_transitions=True,
