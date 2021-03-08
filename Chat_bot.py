@@ -15,14 +15,17 @@ def Chat_Reply(event):
     text = event.message.text[1:]
     print(text)
     product = pd.read_csv("products.csv",encoding = "big5")
-    print(product)
-    #Order State
+    #order state
     if ("我要" in text[:2]):
         members = pd.read_csv("members.csv")
         userid = event.source.user_id 
-        if userid not in members["ID"]:#確認使用者有註冊會員
-            send_text_message(event.reply_token, "您尚未註冊會員,請先加我好友跟我聊聊天唷>.<")
-            return
+        for ID in members["ID"]:
+            if userid == ID :#確認使用者有註冊會員
+                send_text_message(event.reply_token,"訂單已完成")
+                return
+                
+        send_text_message(event.reply_token, "您尚未註冊會員,請先加我好友跟我聊聊天唷>.<")
+        #訂單狀態
         
         
     

@@ -154,7 +154,7 @@ def webhook_handler():
         #Group State
         elif event.source.type == "group":
             print("IN GROUP")
-            if event.message.text[0] == "!" :
+            if event.message.text[0] == "!" or event.message.text[0] == "！":
                 response = Chat_Reply(event)
             
             
