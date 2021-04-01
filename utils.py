@@ -74,8 +74,7 @@ def push_image_carousel(reply_token,product_lst):#reply_token,title,product_lst
         template=ImageCarouselTemplate(columns=carousel_cols)
     )
     line_bot_api.reply_message(reply_token,Image_Carousel)
-    return "OK"
-    
+    return "OK"    
 def push_carousel(reply_token,product_lst):
     line_bot_api = LineBotApi(channel_access_token)
     column=[]
@@ -107,7 +106,34 @@ def push_carousel(reply_token,product_lst):
     )
     line_bot_api.reply_message(reply_token,Carousel_template)
     return "OK"
-
+def order_check(text,product):
+    re_order = []
+    for idx, key in enumerate(product.Keys):#多key情況下
+        if " " in key:
+            for split_key in key.split(" "):
+                if split_key in text:
+                    number = number_check(text)
+                    if number:
+                        re_order.append(list(product.產品)[idx])
+                        re_order.append(number)
+                        return re_order
+                    return False
+        else:#單KEY情況
+            if key in text:
+                number = number_check(text)
+                if number:
+                    re_order.append(list(product.產品)[idx])
+                    re_order.append(number)
+                    return re_order
+                return False
+    return False
+def number_check(text):
+    keys = ["加","+"]
+    for key in keys:
+        if key in text:
+            return text.split(key)[-1]
+    return False
+        
 """
 def send_image_url(id, img_url):
     pass
