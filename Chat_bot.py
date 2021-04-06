@@ -35,12 +35,14 @@ def Chat_Reply(event):
                                         info.ADDRESS,
                                         info.PHONE,
                                         order[0],
-                                        order[1]]],
-                                        columns = ["ID","姓名","地址","手機","產品","數量"])
+                                        order[1],
+										text[2:]]],
+                                        columns = ["ID","姓名","地址","手機","產品","數量","紀錄"])
                     order_df=pd.concat([order_df,df])
                     order_df.to_csv("Orders.csv",encoding = "big5",index=False)
                     send_text_message(event.reply_token,info.NAME+"的訂單已完成")
                 return
+				
         send_text_message(event.reply_token, "您尚未註冊會員,請先加我好友跟我聊聊天唷>.<")
         #訂單狀態
         
