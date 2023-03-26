@@ -1,7 +1,7 @@
 # Order BOT Project
-## Image of this projects
-(./img/user_login.jpg)
-(./img/order.jpg)
+## Demo of this projects
+![demo](./img/demo.png)
+
 ### Prerequisite
 * Python 3.6
 * Pipenv
