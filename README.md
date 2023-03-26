@@ -1,7 +1,7 @@
 # Order BOT Project
 ## Image of this projects
-[!user_login](./img/user_login.jpg)
-[!order](./img/order.jpg)
+(./img/user_login.jpg)
+(./img/order.jpg)
 ### Prerequisite
 * Python 3.6
 * Pipenv
